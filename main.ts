@@ -1,5 +1,18 @@
 import { getRestaurants, getMenu } from "./fetchData.js";
 import { Restaurant, Menu } from "./Types";
+// Define your color palette
+const myColorPalette = {
+  primaryColor: '#3E92CC',
+  secondaryColor: '#2ECC71',
+  // Add more colors as needed
+};
+
+// Set the CSS variables using the color palette
+// Set the CSS variables using the color palette
+Object.keys(myColorPalette).forEach((key) => {
+  const colorKey = key as keyof typeof myColorPalette; // Assert the type of key
+  document.documentElement.style.setProperty(`--${colorKey}`, myColorPalette[colorKey]);
+});
 
 const baseUrl: string = 'https://student-restaurants.azurewebsites.net/';
 const restaurantsUrl: string = 'api/v1/restaurants';
@@ -70,3 +83,21 @@ function openMenuModal(menu: Menu[]) {
   document.body.appendChild(menuModal);
   menuModal.showModal();
 }
+const colorToggle = document.getElementById('colorToggle') as HTMLInputElement;
+
+colorToggle.addEventListener('change', function() {
+  const primaryColor = getComputedStyle(document.body).getPropertyValue('--primary-color').trim();
+  const secondaryColor = getComputedStyle(document.body).getPropertyValue('--secondary-color').trim();
+
+  if (this.checked) {
+    // Change colors to your alternate palette
+    document.body.style.setProperty('--primary-color', '--secondary-color');
+    document.body.style.setProperty('--secondary-color', '--primary-color');
+    // Add more color changes as needed
+  } else {
+    // Revert back to the original colors
+    document.body.style.setProperty('--primary-color', primaryColor);
+    document.body.style.setProperty('--secondary-color', secondaryColor);
+    // Add more color changes as needed
+  }
+});
