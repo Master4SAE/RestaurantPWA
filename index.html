@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="styles.css">
+    <link rel="manifest" href="manifest.json">
+    <meta name="theme-color" content="#4285f4">
+    <title>Restaurant</title>
+</head>
+<body>
+    <button type="button" class="collapsible"><h2>Please choose a restaurant from list below</h2></button>
+    <div class="content">
+        <table>
+            <tr>
+                <th>Restaurant Name</th>
+                <th>Address</th>
+            </tr>
+        </table>
+    </div>
+
+    <script>
+        var coll = document.getElementsByClassName("collapsible");
+        var i;
+        
+        for (i = 0; i < coll.length; i++) {
+          coll[i].addEventListener("click", function() {
+            this.classList.toggle("active");
+            var content = this.nextElementSibling;
+            if (content.style.display === "block") {
+              content.style.display = "none";
+            } else {
+              content.style.display = "block";
+            }
+          });
+        }
+        </script>
+        <script>
+            if ('serviceWorker' in navigator) {
+              navigator.serviceWorker.register('service-worker.js')
+                .then((registration) => {
+                  console.log('Service Worker registered with scope:', registration.scope);
+                })
+                .catch((error) => {
+                  console.error('Service Worker registration failed:', error);
+                });
+            }
+          </script>
+          
+    <script type="module" src="./build/main.js"></script>
+</body>
+</html>
